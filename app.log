@@ -1,0 +1,49 @@
+2024-10-09 19:35:11,474 WARNING absl Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2024-10-09 19:35:11,511 INFO werkzeug [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-10-09 19:35:11,511 INFO werkzeug [33mPress CTRL+C to quit[0m
+2024-10-09 19:35:11,515 INFO werkzeug  * Restarting with stat
+2024-10-09 19:35:17,455 WARNING absl Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2024-10-09 19:35:17,472 WARNING werkzeug  * Debugger is active!
+2024-10-09 19:35:17,482 INFO werkzeug  * Debugger PIN: 717-173-683
+2024-10-09 19:46:19,320 WARNING absl Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2024-10-09 19:46:19,356 INFO werkzeug [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-10-09 19:46:19,356 INFO werkzeug [33mPress CTRL+C to quit[0m
+2024-10-09 19:46:19,358 INFO werkzeug  * Restarting with stat
+2024-10-09 19:46:25,685 WARNING absl Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2024-10-09 19:46:25,701 WARNING werkzeug  * Debugger is active!
+2024-10-09 19:46:25,704 INFO werkzeug  * Debugger PIN: 717-173-683
+2024-10-09 19:47:58,665 WARNING absl Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2024-10-09 19:47:58,687 INFO werkzeug [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-10-09 19:47:58,687 INFO werkzeug [33mPress CTRL+C to quit[0m
+2024-10-09 19:47:58,687 INFO werkzeug  * Restarting with stat
+2024-10-09 19:48:05,203 WARNING absl Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2024-10-09 19:48:05,217 WARNING werkzeug  * Debugger is active!
+2024-10-09 19:48:05,219 INFO werkzeug  * Debugger PIN: 717-173-683
+2024-10-09 19:48:12,347 INFO werkzeug 127.0.0.1 - - [09/Oct/2024 19:48:12] "GET / HTTP/1.1" 200 -
+2024-10-09 19:48:56,247 ERROR root Unexpected error: Exception encountered when calling Sequential.call().
+
+[1mInput 0 of layer "conv2d" is incompatible with the layer: expected axis -1 of input shape to have value 1, but received input with shape (1, 32, 32, 3)[0m
+
+Arguments received by Sequential.call():
+  • inputs=tf.Tensor(shape=(1, 224, 224, 3), dtype=float32)
+  • training=False
+  • mask=None
+2024-10-09 19:48:56,248 INFO werkzeug 127.0.0.1 - - [09/Oct/2024 19:48:56] "[35m[1mPOST /predict HTTP/1.1[0m" 500 -
+2024-10-09 19:49:21,014 INFO werkzeug  * Detected change in 'C:\\Users\\ADMIN\\OneDrive\\Desktop\\Commision\\IRRI\\insect-classification-app\\app.py', reloading
+2024-10-09 19:49:21,540 INFO werkzeug  * Restarting with stat
+2024-10-09 19:49:29,205 WARNING absl Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2024-10-09 19:49:29,222 WARNING werkzeug  * Debugger is active!
+2024-10-09 19:49:29,222 INFO werkzeug  * Debugger PIN: 717-173-683
+2024-10-09 19:49:30,416 INFO werkzeug 127.0.0.1 - - [09/Oct/2024 19:49:30] "GET / HTTP/1.1" 200 -
+2024-10-09 19:49:42,556 ERROR root Unexpected error: Exception encountered when calling Sequential.call().
+
+[1mInput 0 of layer "conv2d" is incompatible with the layer: expected axis -1 of input shape to have value 1, but received input with shape (1, 32, 32, 3)[0m
+
+Arguments received by Sequential.call():
+  • inputs=tf.Tensor(shape=(1, 224, 224, 3), dtype=float32)
+  • training=False
+  • mask=None
+2024-10-09 19:49:42,557 INFO werkzeug 127.0.0.1 - - [09/Oct/2024 19:49:42] "[35m[1mPOST /predict HTTP/1.1[0m" 500 -

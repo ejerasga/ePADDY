@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ePADDY</title>
+    <link rel="icon" type="image/x-icon" href="static\resources\Acoustic sensor.png">
+    <style>
+        /* Existing styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2e8b57;
+            margin-bottom: 30px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #fff;
+            border: 2px solid #2e8b57;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .button-container {
+            display: flex;
+            align-items: center;
+            
+        }
+        input[type="file"] {
+            display: none; /* Hide the default file input */
+        }
+        .custom-file-button {
+            background-color: #2e8b57;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-right: 10px; /* Space between buttons */
+        }
+        .custom-file-button:hover, button:hover {
+            background-color: #1c5c3b;
+        }
+        button {
+            background-color: #2e8b57;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        /* New styles for file list */
+        .file-list {
+            margin-top: 20px;
+            width: 80%;
+            max-width: 500px;
+        }
+        .file-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .file-list li {
+            background-color: #e6f7ff;
+            margin-bottom: 5px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: 1px solid #b3e5fc;
+            word-break: break-all;
+        }
+
+        /* tutorial styles */
+        .tutorial-container {
+            margin-top: 30px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #2e8b57;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+            
+        }
+
+        h2 {
+            text-align: center;
+            color: #2e8b57;
+            margin-bottom: 40px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .step img {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+        }
+
+        .step-text {
+            flex-grow: 1;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background-color: #ccc;
+            margin: 20px 0;
+        }
+
+        /* Numbering */
+        .step-number {
+            font-size: 24px;
+            color: #2e8b57;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .step-text p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Enhanced Pest Acoustic Detection Device for Rice</h1>
+    <form action="/predict" method="post" enctype="multipart/form-data">
+        <div class="button-container">
+            <label class="custom-file-button" for="files">Choose Files</label>
+            <input type="file" id="files" name="files" accept=".wav" multiple>
+            <button type="submit">Upload and Predict</button>
+        </div>
+        <!--  display file names -->
+        <div class="file-list" id="fileList">
+        </div>
+    </form>
+
+    <!-- Tutorial Section -->
+    <div class="tutorial-container">
+        <h2>How To Use ePADDY</h2>
+    
+        <div class="step">
+            <div class="step-number">1.</div>
+            <img src="static\resources\upload-icon.png" alt="Upload Icon">
+            <div class="step-text">
+                <p>Upload 1 or multiple .wav files of insect species (<em>Rhyzopertha dominica</em>, <em>Tribolium castaneum</em>, or <em>Sitophilus oryzae</em>).</p>
+                <p>Click the "Choose Files" button to select your files.</p>
+            </div>
+        </div>
+    
+        <hr>
+    
+        <div class="step">
+            <div class="step-number">2.</div>
+            <img src="static\resources\upload-predict-icon.png" alt="Upload and Predict Icon">
+            <div class="step-text">
+                <p>Once you've selected the files, click the "Upload and Predict" button to start the prediction process.</p>
+            </div>
+        </div>
+    
+        <hr>
+    
+        <div class="step">
+            <div class="step-number">3.</div>
+            <img src="static\resources\results-icon.png" alt="Results Icon">
+            <div class="step-text">
+                <p>Wait for the system to process the files. The results will be displayed in a separate window, showing:</p>
+                <ul>
+                    <li>Prediction accuracy</li>
+                    <li>A bar graph with the classifications</li>
+                    <li>A spectrogram of each file</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Loader -->
+        <div id="loader" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.8); z-index: 999; text-align: center;">
+            <h2>Loading... Please wait</h2>
+            <img src="static\resources\Loading.gif" alt="Loading" style="margin-top: 20%;"/>
+        </div>
+    
+    </div>
+    <!--<a href="/">Go Back</a>-->
+
+    <!-- handle file listing -->
+    <script>
+        document.getElementById('files').addEventListener('change', function(event) {
+            const fileListContainer = document.getElementById('fileList');
+            fileListContainer.innerHTML = '';
+
+            const files = event.target.files;
+            if (files.length > 0) {
+                const list = document.createElement('ul');
+                for (let i = 0; i < files.length; i++) {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = files[i].name;
+                    list.appendChild(listItem);
+                }
+                fileListContainer.appendChild(list);
+            } else {
+                fileListContainer.innerHTML = '<p>No files selected.</p>';
+            }
+        });
+
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function() {
+            document.getElementById('loader').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
