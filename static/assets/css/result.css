@@ -1,0 +1,66 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+h1 {
+    text-align: center;
+    color: #2e8b57;
+    margin-bottom: 30px;
+}
+.generate-csv-btn {
+    background-color: #2e8b57; /* Initial background color */
+    color: white;               /* Text color */
+    border: none;               /* Remove border */
+    border-radius: 5px;        /* Rounded corners */
+    padding: 10px 15px;        /* Padding around the text */
+    cursor: pointer;            /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.generate-csv-btn:hover {
+    background-color: #1c5c3b; /* Background color on hover */
+}
+.result-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.file-result {
+    background-color: #fff;
+    border: 2px solid #2e8b57;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    width: 80%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.file-result h2 {
+    color: #2e8b57;
+    margin-bottom: 15px;
+}
+.graphs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.graphs img {
+    width: 400px;
+    height: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #2e8b57;
+    text-decoration: none;
+    font-weight: bold;
+}
+a:hover {
+    text-decoration: underline;
+}

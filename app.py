@@ -1,10 +1,12 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, make_response
 import os
 import numpy as np
 import librosa
 import matplotlib
+import csv
 matplotlib.use('Agg')  
 import matplotlib.pyplot as plt
+import librosa.display
 from keras.models import load_model
 import json
 
@@ -57,7 +59,7 @@ def predict_species(file_path):
 # generate bar graph for predictions
 def generate_graph(prediction, filename):
     species = ['$\it{R\_dominica}$', '$\it{S\_oryzae}$', '$\it{T\_castaneum}$']
-    values = [prediction['r_dominica'], prediction['s_oryzae'], prediction['t_castaneum']]
+    values = [prediction['s_oryzae'], prediction['r_dominica'], prediction['t_castaneum']]
     
     plt.figure(figsize=(5, 4))
     plt.bar(species, values, color=['#1F78B4', '#1F78B4', '#1F78B4'])
@@ -124,6 +126,28 @@ def predict():
             })
     
     return render_template('result.html', results=results)
+
+@app.route('/generate_csv', methods=['POST'])
+def generate_csv():
+    results = request.form.getlist('results')[0]  # Get results passed from the form
+    results = json.loads(results)  # Load results as JSON
+
+    csv_output = [["File Name", "R_dominica", "S_oryzae", "T_castaneum"]]
+    
+    for item in results:
+        csv_output.append([
+            item['filename'],
+            f"{item['result']['s_oryzae']}%",
+            f"{item['result']['r_dominica']}%",
+            f"{item['result']['t_castaneum']}%"
+        ])
+    
+    output = '\n'.join(','.join(row) for row in csv_output)
+    response = make_response(output)
+    response.headers['Content-Disposition'] = 'attachment; filename=predictions.csv'
+    response.headers['Content-Type'] = 'text/csv'
+    
+    return response
 
 if __name__ == '__main__':
     app.run(debug=True)

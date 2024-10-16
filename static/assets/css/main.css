@@ -155,7 +155,7 @@ h6 {
   font-size: 30px;
   margin: 0;
   font-weight: 400;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   color: var(--heading-color);
 }
 
@@ -912,7 +912,7 @@ section,
 
 .clients .client-logo img {
   padding: 20px 40px;
-  max-width: 90%;
+  max-width: 100%;
   transition: 0.3s;
   opacity: 0.5;
   filter: grayscale(100);
@@ -1366,14 +1366,22 @@ section,
   overflow: hidden;
   border-right: 3px solid var(--background-color);
   border-bottom: 3px solid var(--background-color);
+  padding: 5px;
 }
 
 .gallery .gallery-item img {
   transition: all ease-in-out 0.4s;
+  width: 500px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
 .gallery .gallery-item:hover img {
   transform: scale(1.1);
+  width: 500px;
+  height: 320px;
+  object-fit: cover;
 }
 
 /*--------------------------------------------------------------

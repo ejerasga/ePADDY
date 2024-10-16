@@ -4,71 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ePADDY</title>
-    <link rel="icon" type="image/x-icon" href="static\resources\Acoustic sensor.png">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f8ff;
-            margin: 0;
-            padding: 20px;
-            color: #333;
+    <link rel="icon" type="image/x-icon" href="static/resources/Acoustic sensor.png">
+    <link href="static/assets/css/result.css" rel="stylesheet">
+    <script>
+        function toggleSound(soundId) {
+            const sound = document.getElementById(soundId);
+            if (sound.paused) {
+                sound.play();
+            } else {
+                sound.pause();
+                sound.currentTime = 0; // Reset to start
+            }
         }
-        h1 {
-            text-align: center;
-            color: #2e8b57;
-            margin-bottom: 30px;
-        }
-        .result-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .file-result {
-            background-color: #fff;
-            border: 2px solid #2e8b57;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 30px;
-            width: 80%;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .file-result h2 {
-            color: #2e8b57;
-            margin-bottom: 15px;
-        }
-        .graphs {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .graphs img {
-            width: 400px;
-            height: 300px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        a {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: #2e8b57;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    </script>
 </head>
 <body>
     <h1>Prediction Results</h1>
+    <div style="text-align: right; margin-bottom: 20px; margin-right: 8em;">
+        <form action="/generate_csv" method="post">
+            <input type="hidden" name="results" value='{{ results | tojson }}'>
+            <button type="submit" class="generate-csv-btn">Generate CSV</button>
+        </form>
+    </div>
     <div class="result-container">
         {% for item in results %}
         <div class="file-result">
             <h2>File: {{ item.filename }}</h2>
-            <p><strong><em>R_dominica:</em></strong> {{ item.result['r_dominica'] }}%</p>
-            <p><strong><em>S_oryzae:</em></strong> {{ item.result['s_oryzae'] }}%</p>
+            <p><strong><em>R_dominica:</em></strong> {{ item.result['s_oryzae'] }}%</p>
+            <p><strong><em>S_oryzae:</em></strong> {{ item.result['r_dominica'] }}%</p>
             <p><strong><em>T_castaneum:</em></strong> {{ item.result['t_castaneum'] }}%</p>
             
             <div class="graphs">
@@ -78,12 +41,15 @@
                 </div>
                 <div>
                     <h3>Predicted Insect</h3>
-                    {% if item.result['predicted_species'] == 'R_dominica' %}
-                        <img src="{{ url_for('static', filename='resources/insects/Rhyzopertha dominica.jpg') }}" alt="Rhyzopertha dominica">
-                    {% elif item.result['predicted_species'] == 'S_oryzae' %}
-                        <img src="{{ url_for('static', filename='resources/insects/Sitophilus oryzae.jpg') }}" alt="Sitophilus oryzae">
+                    {% if item.result['predicted_species'] == 'S_oryzae' %}
+                        <img src="{{ url_for('static', filename='resources/insects/Rhyzopertha dominica.jpg') }}" alt="Rhyzopertha dominica" onclick="toggleSound('sound_S_oryzae')">
+                        <audio id="sound_S_oryzae" src="{{ url_for('static', filename='resources/insect_sounds/R_dominica.wav') }}"></audio>
+                    {% elif item.result['predicted_species'] == 'R_dominica' %}
+                        <img src="{{ url_for('static', filename='resources/insects/Sitophilus oryzae.jpg') }}" alt="Sitophilus oryzae" onclick="toggleSound('sound_R_dominica')">
+                        <audio id="sound_R_dominica" src="{{ url_for('static', filename='resources/insect_sounds/S_oryzae.wav') }}"></audio>
                     {% elif item.result['predicted_species'] == 'T_castaneum' %}
-                        <img src="{{ url_for('static', filename='resources/insects/Tribolium castaneum.jpg') }}" alt="Tribolium castaneum">
+                        <img src="{{ url_for('static', filename='resources/insects/Tribolium castaneum.jpg') }}" alt="Tribolium castaneum" onclick="toggleSound('sound_T_castaneum')">
+                        <audio id="sound_T_castaneum" src="{{ url_for('static', filename='resources/insect_sounds/T_castaneum.wav') }}"></audio>
                     {% endif %}
                 </div>
             </div>
